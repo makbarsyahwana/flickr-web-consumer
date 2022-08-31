@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback } from 'react'
-import { Card } from 'antd';
+import { Card, Row, Col } from 'antd';
 const { Meta } = Card;
 import axios from 'axios'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 export default function Images() {
-    const [images, setImages] = useState([] as any)
+    const [imagesData, setImagesData] = useState([] as any)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -15,7 +15,8 @@ export default function Images() {
 
     const fetchFeed: any = async () => {
         try {
-          const { data } = await axios.get('/api/flicker-image-feed')
+          const { data } = await axios.get('/api/flickr-image-feed')
+          setImagesData(data.data.items)
           console.log(data)
         } catch (e) {
           console.log(e)
@@ -23,12 +24,30 @@ export default function Images() {
       }
 
     return (
-        <Card
-            hoverable
-            style={{ width: 240 }}
-            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-        >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
-        </Card>
+        <>
+            <div style={{
+                display: "flex",
+                flexFlow: "column wrap",
+                justifyContent: "flex-start",
+                alignItems: "flex-start"
+            }}>
+                <Row gutter={4}>
+                    {
+                        imagesData.map((image: any, index: any) => (
+                            <Col>
+                                <Card
+                                key={index}
+                                hoverable
+                                style={{ height: "auto", width: 240, margin: "1%", padding: "10px" }}
+                                cover={<img alt="example" src={`${image.media.m}`} />}
+                                >
+                                    <Meta title={image.title} description={image.tags} />
+                                </Card>
+                            </Col>
+                        ))
+                    }
+                </Row>
+            </div>
+        </>
     )
 }
