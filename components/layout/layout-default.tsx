@@ -21,7 +21,7 @@ export default function LayoutDefault({children} : Props) {
                             <p style={{color: "white"}}>Flickr Image</p>
                         </div>
                 </Header>
-                <Layout style={{ padding: '24px 24px 24px', maxHeight: "90vh", overflowY: "scroll"}}>
+                <Layout style={{ padding: '24px 24px 24px', height: "90vh", maxHeight: "90vh", overflowY: "scroll"}}>
                         <Content
                             className="site-layout-background"
                         >
