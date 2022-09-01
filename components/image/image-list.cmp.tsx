@@ -63,7 +63,7 @@ export default function Images() {
                                 </Col>
                             ))
                         }
-                        <div style={{ width: "100%", textAlign: "center", marginTop: 25, marginBottom: 25}}>
+                        <div id="load-more" style={{ width: "100%", textAlign: "center", marginTop: 25, marginBottom: 25}}>
                             <Button onClick={handleLoadMore} type="primary" shape="round" size={'large'}>
                                 Load More
                             </Button>
